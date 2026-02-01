@@ -1,12 +1,12 @@
 {
-  "total_patterns_with_3_lines": 3760,
+  "total_patterns_with_3_lines": 2208,
   "pattern_counts_by_length": {
-    "5": 1808,
-    "6": 584,
-    "7": 48,
-    "4": 1320
+    "5": 760,
+    "6": 176,
+    "7": 16,
+    "4": 1256
   },
   "min_length": 4,
   "max_length": 7,
-  "percentage_of_all_patterns": 0.9663027611587408
+  "percentage_of_all_patterns": 1.5784958535887905
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import PatternVisualizer from './PatternVisualizer'
+import { isValidPattern } from './patternValidator'
 import './App.css'
 
 function App() {
@@ -19,8 +20,14 @@ function App() {
         return response.json()
       })
       .then(data => {
-        setPatterns(data)
+        // Filter out invalid patterns
+        const validPatterns = data.filter(pattern => isValidPattern(pattern))
+        setPatterns(validPatterns)
         setLoading(false)
+        
+        if (validPatterns.length !== data.length) {
+          console.warn(`Filtered out ${data.length - validPatterns.length} invalid patterns`)
+        }
       })
       .catch(err => {
         setError(err.message)
