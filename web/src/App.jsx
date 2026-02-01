@@ -76,7 +76,7 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>🔐 Android Pattern Lock Visualizer</h1>
+        <h1>{"🔐 Android Pattern Lock Visualizer For Marie-Eve <3"}</h1>
         <p className="subtitle">Patterns with Exactly 3 Lines</p>
         <div className="stats">
           <div className="stat">
