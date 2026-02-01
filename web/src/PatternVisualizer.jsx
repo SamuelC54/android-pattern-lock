@@ -94,6 +94,7 @@ function PatternVisualizer({ pattern, index }) {
             const position = getPosition(parseInt(dotNum))
             const isVisited = pattern.includes(parseInt(dotNum))
             const visitOrder = pattern.indexOf(parseInt(dotNum))
+            const isFirstDot = visitOrder === 0
 
             return (
               <g key={dotNum}>
@@ -102,9 +103,21 @@ function PatternVisualizer({ pattern, index }) {
                   cx={position.x}
                   cy={position.y}
                   r={dotRadius}
-                  fill={isVisited ? '#4a90e2' : '#333'}
-                  stroke={isVisited ? '#2c5aa0' : '#666'}
-                  strokeWidth="2"
+                  fill={
+                    isFirstDot 
+                      ? '#10b981'  // Green for first dot
+                      : isVisited 
+                        ? '#4a90e2'  // Blue for visited dots
+                        : '#333'      // Gray for unvisited dots
+                  }
+                  stroke={
+                    isFirstDot
+                      ? '#059669'  // Darker green border for first dot
+                      : isVisited 
+                        ? '#2c5aa0'  // Darker blue border for visited dots
+                        : '#666'      // Gray border for unvisited dots
+                  }
+                  strokeWidth={isFirstDot ? "3" : "2"}
                   className="pattern-dot"
                 />
                 {/* Dot number */}
@@ -120,8 +133,8 @@ function PatternVisualizer({ pattern, index }) {
                 >
                   {dotNum}
                 </text>
-                {/* Visit order indicator */}
-                {isVisited && visitOrder >= 0 && (
+                {/* Visit order indicator - only for visited dots that aren't the first */}
+                {isVisited && visitOrder >= 0 && !isFirstDot && (
                   <circle
                     cx={position.x}
                     cy={position.y}
@@ -130,6 +143,18 @@ function PatternVisualizer({ pattern, index }) {
                     stroke="#ff6b6b"
                     strokeWidth="2"
                     className="pattern-visit-indicator"
+                  />
+                )}
+                {/* Special indicator for first dot */}
+                {isFirstDot && (
+                  <circle
+                    cx={position.x}
+                    cy={position.y}
+                    r={dotRadius + 5}
+                    fill="none"
+                    stroke="#10b981"
+                    strokeWidth="2.5"
+                    className="pattern-first-dot-indicator"
                   />
                 )}
               </g>
